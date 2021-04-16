@@ -192,8 +192,8 @@ export default {
                     form.description = null;
                     form.oum = "F";
                     form.barcode = null;
-                    form.yesdiscontinued = "No";
-                    form.nodiscontinued = "Yes";
+                    form.yesdiscontinued = "no";
+                    form.nodiscontinued = null;
                     form.photo_path = null;
                     form.Created = null;
                     form.Updated = null;
