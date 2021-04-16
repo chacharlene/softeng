@@ -35,7 +35,9 @@ Route::middleware('auth')
 
    // Route::resource('pos', PurchaseOrderController::class);
   //  Route::resource('prs', PurchaseRequestController::class);
+
   Route::resource('sc', StockCategoryController::class);
+  Route::resource('stocks', StockController::class);
 
 });
 
