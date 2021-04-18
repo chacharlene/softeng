@@ -24,19 +24,19 @@
                             {{ form.id }}
                         </div>
 
-                                                <div class="flex flex-col pt-6">
-                            <label for="sti">Stock Category ID</label>
+                            <div class="flex flex-col pt-6">
+                            <label for="stock_category_id">Stock Category ID</label>
                             <input
                                 type="text"
-                                id="sti"
-                                name="sti"
-                                v-model="form.sti"
+                                id="stock_category_id"
+                                name="stock_category_id"
+                                v-model="form.stock_category_id"
                                 autocomplete="off"
                             />
                             <div class="text-red-700 text-sm">
-                                {{ errors.sti }}
+                                {{ errors.stock_category_id }}
                             </div>
-                            {{ form.sti }}
+                            {{ form.stock_category_id }}
                         </div>
 
 
@@ -55,27 +55,22 @@
                              {{ form.description }}
                         </div>
 
-<div class="flex flex-col pt-6">
-                            <label for="oum">OUM</label>
-                            <select name="oum" id="oum" v-model="form.oum">
-                                <option value="F">PR</option>
-                                <option value="R">CRD</option>
-                                <option value="R">GAL</option>
-                                <option value="R">SGL</option>
-                                <option value="R">DZ</option>
-                                <option value="R">LOT</option>
-                                <option value="R">CTN</option>
-                                <option value="R">PK50</option>
-                                <option value="R">MM</option>
-
-                            </select>
-
+                            <div class="flex flex-col pt-6">
+                            <label for="uom">UOM</label>
+                            <input
+                                type="text"
+                                id="uom"
+                                name="uom"
+                                v-model="form.uom"
+                                autocomplete="off"
+                            />
                             <div class="text-red-700 text-sm">
-                                {{ errors.oum }}
+                                {{ errors.uom }}
                             </div>
+                             {{ form.uom }}
                         </div>
 
-                <div class="flex flex-col pt-6">
+                             <div class="flex flex-col pt-6">
                             <label for="barcode">Barcode</label>
                             <input
                                 type="text"
@@ -93,58 +88,21 @@
 
                         <div class="w-full flex flex-col pt-6">
                             <label for="discontinued">Discontinued</label>
-<input type="checkbox" id="discontinued" value="Yes" v-model="form.yesdiscontinued">
-<label for="Yes">Yes</label>
-<input type="checkbox" id="discontinued" value="No" v-model="form.nodiscontinuedsd">
-<label for="No">No</label>
+                            <div>
+                       <input type="radio" id="Y" value="Y" v-model="discontinued">
+                        <label for="Y" class="mr-5">Y</label>
 
-
-
-
+                        <input type="radio" id="N" value="N" v-model="discontinued">
+                        <label for="N">N</label>
+                            </div>
                             <div class="text-red-700 text-sm">
                                 {{ errors.discontinued }}
                             </div>
                         </div>
 
-                        <div class="flex flex-col pt-6">
-                            <label for="photo">Photo Path</label>
-                            <input
-                                type="text"
-                                id="Photo"
-                                name="Photo"
-                                v-model="form.photo"
-                            />
-                            <div class="text-red-700 text-sm">
-                                {{ errors.photo }}
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col pt-6">
-                            <label for="Created">Date Created</label>
-                            <input
-                                type="text"
-                                id="Created"
-                                name="Created"
-                                v-model="form.Created"
-                            />
-                            <div class="text-red-700 text-sm">
-                                {{ errors.Created }}
-                            </div>
-                        </div>
 
 
-                                                <div class="flex flex-col pt-6">
-                            <label for="Updated">Date Updated</label>
-                            <input
-                                type="text"
-                                id="Updated"
-                                name="Updated"
-                                v-model="form.Updated"
-                            />
-                            <div class="text-red-700 text-sm">
-                                {{ errors.Updated }}
-                            </div>
-                        </div>
+
 
                         <div class="flex flex-col pt-6">
                             <button
@@ -162,9 +120,13 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+
+import { ref, reactive } from "Vue";
 import Layout from "@/Layouts/Authenticated";
 import { Inertia } from "@inertiajs/inertia";
+
+
+
 export default {
     components: {
         Layout,
@@ -179,24 +141,25 @@ export default {
 
         const form = reactive({
             id: null,
+            stock_category_id: null,
             description: null,
-            type: "F",
-            stock_account: null,
+            uom: null ,
+            barcode: null,
+            discontinued: "N",
+            photo_path:null
+
         });
         const submit = () => {
             Inertia.post(route("stocks.store"), form, {
                 onSuccess: () => {
                     // Handle success event
                     form.id = null;
-                    form.sti = null;
+                    form.stock_category_id = null;
                     form.description = null;
-                    form.oum = "F";
+                    form.uom = null;
                     form.barcode = null;
-                    form.yesdiscontinued = "no";
-                    form.nodiscontinued = null;
-                    form.photo_path = null;
-                    form.Created = null;
-                    form.Updated = null;
+                    form.discontinued = "N";
+
                     //   this.reset();
                 },
             });
@@ -210,3 +173,4 @@ export default {
     },
 };
 </script>
+
